@@ -11,8 +11,6 @@ namespace Horror.Attention
     {
         #region Inspector
 
-        public Transform forwardReference;
-
         public Transform target;
 
         public float lerp = 0.1f;
@@ -34,27 +32,10 @@ namespace Horror.Attention
         {
             if (target != null)
             {
-                Transform reference;
-
-                if (forwardReference != null)
-                    reference = forwardReference;
-                else
-                    reference = transform;
-
                 Vector3 toTarget = (target.position - transform.position);
-                Vector3 projectedDirectionToTarget = Vector3.ProjectOnPlane(toTarget, Vector3.up).normalized;
-
-                Vector3 projectedReferenceForward = Vector3.ProjectOnPlane(reference.forward, Vector3.up).normalized;
-                Vector3 projectedReferenceRight = Vector3.ProjectOnPlane(reference.right, Vector3.up).normalized;
-
-                forwardDot = Vector3.Dot(projectedDirectionToTarget, projectedReferenceForward);
-                rightDot = Vector3.Dot(projectedDirectionToTarget, projectedReferenceRight);
-
-                forwardIn01 = (forwardDot + 1) / 2;
-                angle = (1 - forwardIn01) * 180;
-
-                Quaternion targetRotation = Quaternion.AngleAxis(angle * Mathf.Sign(-rightDot), Vector3.forward);
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, lerp);
+                Vector3 finalUp = Vector3.ProjectOnPlane(toTarget, -transform.forward).normalized;
+                Quaternion finalRotation = Quaternion.LookRotation(transform.forward, finalUp);
+                transform.rotation = Quaternion.Lerp(transform.rotation, finalRotation, lerp);
             }
             else
             {
