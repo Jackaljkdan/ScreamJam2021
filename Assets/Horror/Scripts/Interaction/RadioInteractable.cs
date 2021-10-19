@@ -18,24 +18,43 @@ namespace Horror.Interaction
         [SerializeField]
         private MeshRenderer emissiveButtonRenderer = null;
 
+        [SerializeField]
+        private bool startsOn = true;
+
+        public float onVolume = 1;
+
         #endregion
+
+        public bool IsOn { get; private set; }
 
         private void Start()
         {
             emissiveButtonRenderer.material.DisableKeyword("_EMISSION");
+            IsOn = startsOn;
+            SetOn(IsOn);
         }
 
         protected override void PerformInteraction(RaycastHit hit)
         {
-            if (audioSource.isPlaying)
+            if (!enabled)
+                return;
+
+            SetOn(!IsOn);
+        }
+
+        public void SetOn(bool on)
+        {
+            IsOn = on;
+
+            if (IsOn)
             {
-                audioSource.Stop();
-                emissiveButtonRenderer.material.DisableKeyword("_EMISSION");
+                audioSource.volume = onVolume;
+                emissiveButtonRenderer.material.EnableKeyword("_EMISSION");
             }
             else
             {
-                audioSource.Play();
-                emissiveButtonRenderer.material.EnableKeyword("_EMISSION");
+                audioSource.volume = 0;
+                emissiveButtonRenderer.material.DisableKeyword("_EMISSION");
             }
         }
     }
