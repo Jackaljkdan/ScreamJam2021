@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Horror.Input
@@ -16,12 +17,18 @@ namespace Horror.Input
 
         public LayerMask layerMask = ~0;
 
-        public float maxDistance = 5;
+        public float distance = 5;
+
+        public float mobileMaxTouchSeconds = 0.2f;
 
         #endregion
 
-        [Inject]
-        private ActionKeysReader actionKeys = null;
+        private bool hasAlreadyFired = false;
+
+        private Dictionary<int, float> touchSeconds = new Dictionary<int, float>();
+
+        //[Inject(Id = "dev")]
+        //private Text devTextUi = null;
 
         private void Start()
         {
@@ -30,56 +37,93 @@ namespace Horror.Input
 
         private void Update()
         {
-            KeyCode code = actionKeys.ReadKeyDown().FirstOrDefault();
+            if (!Application.isMobilePlatform)
+                DesktopUpdate();
+            else
+                MobileUpdate();
+        }
 
-            if (code == default)
-                return;
+        private void DesktopUpdate()
+        {
+            if (!hasAlreadyFired)
+            {
+                if (UnityEngine.Input.GetAxis("Fire1") == 1)
+                {
+                    Raycast();
+                    hasAlreadyFired = true;
+                }
+            }
+            else if (UnityEngine.Input.GetAxis("Fire1") != 1)
+            {
+                hasAlreadyFired = false;
+            }
+        }
 
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistance * GetDistanceMultiplier(), layerMask))
+        private void MobileUpdate()
+        {
+            int relevantFingers = 0;
+            int endingFingers = 0;
+
+            //devTextUi.text = $"max: {mobileMaxTouchSeconds}\n";
+
+            for (int i = 0; i < UnityEngine.Input.touchCount; i++)
+            {
+                var touch = UnityEngine.Input.GetTouch(i);
+
+                if (touch.position.x < Screen.width / 2f)
+                {
+                    touchSeconds.Remove(touch.fingerId);
+                    continue;
+                }
+
+                relevantFingers++;
+
+                try
+                {
+                    touchSeconds[touch.fingerId] += Time.deltaTime;
+                }
+                catch (KeyNotFoundException)
+                {
+                    touchSeconds[touch.fingerId] = Time.deltaTime;
+                }
+
+                if (touch.phase != TouchPhase.Ended)
+                    continue;
+
+                endingFingers++;
+
+                float fingerSeconds = touchSeconds[touch.fingerId];
+                touchSeconds.Remove(touch.fingerId);
+
+                if (hasAlreadyFired)
+                    continue;
+
+                if (fingerSeconds <= mobileMaxTouchSeconds)
+                {
+                    Raycast();
+                    hasAlreadyFired = true;
+                }
+            }
+
+            hasAlreadyFired = false;
+
+            //devTextUi.text += $"relevant: {relevantFingers} ending: {endingFingers}\n";
+            //devTextUi.text += $"secs: {string.Join(" ", touchSeconds.Select(kvp => kvp.Value.ToString("0.##")))}\n";
+        }
+
+        private void Raycast()
+        {
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, distance, layerMask))
             {
                 if (hit.collider.TryGetComponent(out IInteractable interactable))
                     interactable.Interact(hit);
             }
         }
 
-        private float GetDistanceMultiplier()
-        {
-            Vector3 straightForward = transform.forward;
-            straightForward.y = 0;
-            straightForward = straightForward.normalized;
-
-            float dot = Vector3.Dot(straightForward, transform.forward);
-            float halfDot = 0.5f - Mathf.Abs(dot - 0.5f);
-            float multiplier = 1 + halfDot;
-
-            //Debug.Log($"dot from straight {dot} half {halfDot} mul {multiplier}");
-
-            return multiplier;
-        }
-
-#if UNITY_EDITOR
-
-        private int activeRayFrames = 16;
-        private int remainingRayFrames = 0;
-
         private void OnDrawGizmos()
         {
-            if (actionKeys == null)
-                return;
-
-            KeyCode code = actionKeys.ReadKeyDown().FirstOrDefault();
-
-            if (code != default)
-                remainingRayFrames = activeRayFrames;
-            else if (remainingRayFrames > 0)
-                remainingRayFrames--;
-
-            Gizmos.color = remainingRayFrames > 0 ? Color.green : Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + transform.forward * maxDistance * GetDistanceMultiplier());
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * distance);
         }
-#endif
     }
-    
-    [Serializable]
-    public class UnityEventPlayerInputRaycastInteraction : UnityEvent<PlayerInputRaycastInteraction> { }
 }
