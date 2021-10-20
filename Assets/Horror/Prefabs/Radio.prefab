@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9272d5be0c4a8a440baa67287b42382d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 7215685006166064428}
 --- !u!1 &5789177485016682116
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 5789177486348758470}
   - component: {fileID: 5789177486348758467}
   - component: {fileID: 5789177486348758468}
-  - component: {fileID: 5789177486348758469}
   m_Layer: 0
   m_Name: EmissiveButton
   m_TagString: Untagged
@@ -328,19 +327,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5789177486348758469
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5789177486348758471}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5789177486520188015
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +338,6 @@ GameObject:
   - component: {fileID: 5789177486520188014}
   - component: {fileID: 5789177486520188011}
   - component: {fileID: 5789177486520188012}
-  - component: {fileID: 5789177486520188013}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -421,19 +406,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5789177486520188013
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5789177486520188015}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5789177486815391637
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5789177486815391636}
   - component: {fileID: 5789177486815391635}
+  - component: {fileID: 7215685006166064428}
   m_Layer: 0
   m_Name: Radio
   m_TagString: Untagged
@@ -486,6 +459,18 @@ MonoBehaviour:
   emissiveButtonRenderer: {fileID: 5789177486348758468}
   startsOn: 1
   onVolume: 1
+--- !u!114 &7215685006166064428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5789177486815391637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8626549bb133d0c4b990e71fddc6c388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5789177486834026643
 GameObject:
   m_ObjectHideFlags: 0

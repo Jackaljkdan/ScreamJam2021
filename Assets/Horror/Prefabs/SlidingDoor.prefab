@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8571575434459224174}
   - component: {fileID: 8571575434459224169}
   - component: {fileID: 8571575434459224172}
+  - component: {fileID: 3923199854180139289}
   m_Layer: 0
   m_Name: DoorMesh
   m_TagString: Untagged
@@ -107,6 +108,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8571575436349338414}
+--- !u!114 &3923199854180139289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571575434459224171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9272d5be0c4a8a440baa67287b42382d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2477631676754910431}
 --- !u!1 &8571575434644992443
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +165,6 @@ GameObject:
   - component: {fileID: 8571575435399493924}
   - component: {fileID: 8571575435399493931}
   - component: {fileID: 8571575435399493930}
-  - component: {fileID: 8571575435399493925}
   m_Layer: 0
   m_Name: Pad
   m_TagString: Untagged
@@ -220,19 +233,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8571575435399493925
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8571575435399493927}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8571575436285832766
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +244,6 @@ GameObject:
   - component: {fileID: 8571575436285832767}
   - component: {fileID: 8571575436285832706}
   - component: {fileID: 8571575436285832765}
-  - component: {fileID: 8571575436285832764}
   m_Layer: 0
   m_Name: Pad (1)
   m_TagString: Untagged
@@ -313,19 +312,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8571575436285832764
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8571575436285832766}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8571575436349338408
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +323,7 @@ GameObject:
   - component: {fileID: 8571575436349338409}
   - component: {fileID: 8571575436349338415}
   - component: {fileID: 8571575436349338414}
+  - component: {fileID: 2477631676754910431}
   m_Layer: 0
   m_Name: SlidingDoor
   m_TagString: Untagged
@@ -399,3 +386,15 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2477631676754910431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571575436349338408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8626549bb133d0c4b990e71fddc6c388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
