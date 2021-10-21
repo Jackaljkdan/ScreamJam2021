@@ -18,6 +18,8 @@ namespace Horror
 
         public float cooldownSeconds = 2f;
 
+        public float endSeconds = 33.8f;
+
         public float minDot = 0.7f;
 
         public float lookAwayMultiplier = 0.5f;
@@ -97,7 +99,7 @@ namespace Horror
             transform.position = Vector3.Lerp(
                 originalPosition,
                 targetAnchor.position,
-                Mathf.Min(audioSource.clip.length, secondsSpentLooking) / audioSource.clip.length
+                Mathf.Min(endSeconds, secondsSpentLooking) / endSeconds
             );
         }
 

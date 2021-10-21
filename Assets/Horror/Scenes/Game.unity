@@ -6893,10 +6893,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSeconds: 2
+  cooldownSeconds: 2
+  endSeconds: 33.8
   minDot: 0.7
   lookAwayMultiplier: 0.5
   targetAnchor: {fileID: 279659767}
+  audioTime: 0
   secondsSpentLooking: 0
+  cooldownElapsed: 0
   isLooking: 0
 --- !u!1001 &397057037
 PrefabInstance:
