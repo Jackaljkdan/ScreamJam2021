@@ -16,6 +16,8 @@ namespace Horror
 
         public float fadeSeconds = 2f;
 
+        public float cooldownSeconds = 2f;
+
         public float minDot = 0.7f;
 
         public float lookAwayMultiplier = 0.5f;
@@ -25,7 +27,13 @@ namespace Horror
         [Header("Runtime")]
 
         [SerializeField]
+        private float audioTime = 0;
+
+        [SerializeField]
         private float secondsSpentLooking = 0;
+
+        [SerializeField]
+        private float cooldownElapsed = 0;
 
         [SerializeField]
         private bool isLooking = false;
@@ -59,15 +67,32 @@ namespace Horror
                 if (!isLooking)
                     OnBeginLooking(audioSource);
 
+                cooldownElapsed = 0;
                 OnKeepLooking();
             }
             else
             {
                 if (isLooking)
-                    OnStopLooking(audioSource);
+                {
+                    cooldownElapsed += Time.deltaTime;
 
-                OnKeepLookingAway();
+                    if (cooldownElapsed >= cooldownSeconds)
+                    {
+                        OnStopLooking(audioSource);
+                        OnKeepLookingAway(audioSource);
+                    }
+                    else
+                    {
+                        OnKeepLooking();
+                    }
+                }
+                else
+                {
+                    OnKeepLookingAway(audioSource);
+                }
             }
+
+            audioTime = audioSource.time;
 
             transform.position = Vector3.Lerp(
                 originalPosition,
@@ -80,12 +105,14 @@ namespace Horror
         {
             isLooking = true;
 
-            if (audioSource.volume == 0)
-                audioSource.time = secondsSpentLooking;
-
             tween?.Kill();
             tween = audioSource.DOFade(1, fadeSeconds * (1 - audioSource.volume));
-            audioSource.Play();
+
+            if (Mathf.Approximately(audioSource.volume, 0))
+            {
+                audioSource.Play();
+                audioSource.time = secondsSpentLooking;
+            }
         }
 
         private void OnStopLooking(AudioSource audioSource)
@@ -101,8 +128,14 @@ namespace Horror
             secondsSpentLooking += Time.deltaTime;
         }
 
-        private void OnKeepLookingAway()
+        private void OnKeepLookingAway(AudioSource audioSource)
         {
+            if (!Mathf.Approximately(audioSource.volume, 0))
+            {
+                OnKeepLooking();
+                return;
+            }
+
             secondsSpentLooking = Mathf.Max(
                 secondsSpentLooking - Time.deltaTime * lookAwayMultiplier,
                 0
