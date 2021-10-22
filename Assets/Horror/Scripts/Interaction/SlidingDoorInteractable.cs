@@ -56,7 +56,7 @@ namespace Horror.Interaction
 
             if (IsLocked)
             {
-                if (!audioSource.isPlaying)
+                if (audioSource != null && !audioSource.isPlaying)
                     audioSource.PlayOneShot(lockedClip);
 
                 onInteraction.Invoke();
@@ -67,12 +67,14 @@ namespace Horror.Interaction
             if (!IsOpen)
             {
                 GetComponent<Animator>().Play("DoorOpen");
-                audioSource.PlayOneShot(openClip);
+                if (audioSource != null)
+                    audioSource.PlayOneShot(openClip);
             }
             else
             {
                 GetComponent<Animator>().Play("DoorClose");
-                audioSource.PlayOneShot(closeClip);
+                if (audioSource != null)
+                    audioSource.PlayOneShot(closeClip);
             }
 
             IsAnimating = true;
@@ -93,7 +95,8 @@ namespace Horror.Interaction
             }
 
             GetComponent<Animator>().Play("DoorClose");
-            audioSource.PlayOneShot(closeClip);
+            if (audioSource != null)
+                audioSource.PlayOneShot(closeClip);
         }
 
         public void OnDoorOpened()
