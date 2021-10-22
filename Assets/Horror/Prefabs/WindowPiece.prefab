@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 4369651163405115174}
   - component: {fileID: 4369651163405115177}
   - component: {fileID: 4369651163405115176}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: LightRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}

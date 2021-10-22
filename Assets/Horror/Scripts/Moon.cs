@@ -1,4 +1,5 @@
 using DG.Tweening;
+using JK.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,10 @@ namespace Horror
         public float endSeconds = 33.8f;
 
         public float minDot = 0.7f;
+
+        public bool ignoreRaycast = false;
+
+        public LayerMask raycastMask;
 
         public float lookAwayMultiplier = 0.5f;
 
@@ -50,6 +55,8 @@ namespace Horror
 
         public float Intensity => secondsSpentLooking / endSeconds;
 
+        private LayerMask playerLayer;
+
         private Tween tween;
 
         [Inject(Id = "player.camera")]
@@ -58,6 +65,7 @@ namespace Horror
         private void Start()
         {
             initialPositionAnchor.position = transform.position;
+            playerLayer = LayerMask.NameToLayer("Player");
 
             var audioSource = GetComponent<AudioSource>();
             audioSource.volume = 0;
@@ -70,7 +78,17 @@ namespace Horror
             Vector3 directionFromPlayer = (transform.position - playerCamera.position).normalized;
             float lookDot = Vector3.Dot(playerCamera.forward, directionFromPlayer);
 
-            if (lookDot >= minDot)
+            bool isMoonVisible = lookDot >= minDot;
+
+            if (isMoonVisible && !ignoreRaycast)
+            {
+                isMoonVisible = false;
+
+                if (RaycastUtils.Cast(transform.position, playerCamera, out RaycastHit hit, raycastMask))
+                    isMoonVisible = hit.collider.gameObject.layer == playerLayer;
+            }
+
+            if (isMoonVisible)
             {
                 if (!isLooking)
                     OnBeginLooking(audioSource);
