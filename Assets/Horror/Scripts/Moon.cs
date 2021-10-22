@@ -48,6 +48,8 @@ namespace Horror
 
         #endregion
 
+        public float Intensity => secondsSpentLooking / endSeconds;
+
         private Tween tween;
 
         [Inject(Id = "player.camera")]

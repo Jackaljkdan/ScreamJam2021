@@ -8158,6 +8158,7 @@ GameObject:
   - component: {fileID: 396597119}
   - component: {fileID: 396597118}
   - component: {fileID: 396597121}
+  - component: {fileID: 396597122}
   m_Layer: 9
   m_Name: Moon
   m_TagString: Untagged
@@ -8346,6 +8347,24 @@ MonoBehaviour:
   secondsSpentLooking: 0
   cooldownElapsed: 0
   isLooking: 0
+--- !u!114 &396597122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396597116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 396597121}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1001 &397057037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13897,6 +13916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690253389}
   - component: {fileID: 690253387}
+  - component: {fileID: 690253388}
   m_Layer: 8
   m_Name: Post-process Volume
   m_TagString: Untagged
@@ -13921,6 +13941,23 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &690253388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690253386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a280b196471ac4da5a3b592c8a4433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chromaticAtMax: 0.8
+  sinSpeed: 5
+  sinIn01: 0
+  chromaticNominalIntensity: 0
+  chromaticIntensity: 0
 --- !u!4 &690253389
 Transform:
   m_ObjectHideFlags: 0
