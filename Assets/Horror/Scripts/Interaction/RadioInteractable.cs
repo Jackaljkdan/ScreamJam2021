@@ -13,7 +13,10 @@ namespace Horror.Interaction
         #region Inspector
 
         [SerializeField]
-        private AudioSource audioSource = null;
+        private AudioSource mainSource = null;
+
+        [SerializeField]
+        private AudioSource backgroundSource = null;
 
         [SerializeField]
         private MeshRenderer emissiveButtonRenderer = null;
@@ -21,14 +24,28 @@ namespace Horror.Interaction
         [SerializeField]
         private bool startsOn = true;
 
-        public float onVolume = 1;
-
         #endregion
 
         public bool IsOn { get; private set; }
 
+        private IEnumerable<AudioSource> sources
+        {
+            get
+            {
+                yield return mainSource;
+                yield return backgroundSource;
+            }
+        }
+
+        private Dictionary<AudioSource, float> volumes;
+
         private void Start()
         {
+            volumes = new Dictionary<AudioSource, float>();
+
+            foreach (var src in sources)
+                volumes.Add(src, src.volume);
+
             emissiveButtonRenderer.material.DisableKeyword("_EMISSION");
             IsOn = startsOn;
             SetOn(IsOn);
@@ -48,12 +65,16 @@ namespace Horror.Interaction
 
             if (IsOn)
             {
-                audioSource.volume = onVolume;
+                foreach (var src in sources)
+                    src.volume = volumes[src];
+
                 emissiveButtonRenderer.material.EnableKeyword("_EMISSION");
             }
             else
             {
-                audioSource.volume = 0;
+                foreach (var src in sources)
+                    src.volume = 0;
+
                 emissiveButtonRenderer.material.DisableKeyword("_EMISSION");
             }
         }
