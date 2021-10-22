@@ -28,6 +28,8 @@ namespace Horror.Interaction
 
         public bool IsOn { get; private set; }
 
+        public AudioSource MainSource => mainSource;
+
         private IEnumerable<AudioSource> sources
         {
             get
