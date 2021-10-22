@@ -26,6 +26,9 @@ namespace Horror
 
         public Transform targetAnchor;
 
+        [SerializeField]
+        private Transform initialPositionAnchor = null;
+
         [Header("Runtime")]
 
         [SerializeField]
@@ -42,8 +45,6 @@ namespace Horror
 
         #endregion
 
-        private Vector3 originalPosition;
-
         private Tween tween;
 
         [Inject(Id = "player.camera")]
@@ -51,7 +52,7 @@ namespace Horror
 
         private void Start()
         {
-            originalPosition = transform.position;
+            initialPositionAnchor.position = transform.position;
 
             var audioSource = GetComponent<AudioSource>();
             audioSource.volume = 0;
@@ -97,7 +98,7 @@ namespace Horror
             audioTime = audioSource.time;
 
             transform.position = Vector3.Lerp(
-                originalPosition,
+                initialPositionAnchor.position,
                 targetAnchor.position,
                 Mathf.Min(endSeconds, secondsSpentLooking) / endSeconds
             );
@@ -142,6 +143,11 @@ namespace Horror
                 secondsSpentLooking - Time.deltaTime * lookAwayMultiplier,
                 0
             );
+        }
+
+        public void ForceStopLooking()
+        {
+            OnStopLooking(GetComponent<AudioSource>());
         }
     }
     

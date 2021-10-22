@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Horror.Interaction;
 using System;
 using System.Collections;
@@ -18,6 +19,18 @@ namespace Horror
         [SerializeField]
         private GameObject starsBeginning = null;
 
+        [SerializeField]
+        private Transform rotateMoon = null;
+
+        [SerializeField]
+        private float rotateSeconds = 2;
+
+        [SerializeField]
+        private Moon moon = null;
+
+        [SerializeField]
+        private Transform moonTarget = null;
+
         #endregion
 
         private void OnTriggerEnter(Collider other)
@@ -27,9 +40,25 @@ namespace Horror
 
             starsBeginning.SetActive(false);
 
-            Destroy(gameObject);
+            moon.targetAnchor = moonTarget;
+
+            StartCoroutine(RotateMoonCoroutine());
         }
 
+        private IEnumerator RotateMoonCoroutine()
+        {
+            moon.enabled = false;
+            moon.ForceStopLooking();
+
+            rotateMoon.DORotate(new Vector3(0, -180, 0), rotateSeconds);
+
+            yield return new WaitForSeconds(rotateSeconds / 2);
+
+            moon.enabled = true;
+            moon.minDot = -1;
+
+            Destroy(gameObject);
+        }
     }
     
     [Serializable]
