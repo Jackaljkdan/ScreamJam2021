@@ -13336,6 +13336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577762128}
+  - component: {fileID: 577762129}
   m_Layer: 0
   m_Name: Rooms
   m_TagString: Untagged
@@ -13362,6 +13363,20 @@ Transform:
   m_Father: {fileID: 1148279357}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &577762129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577762127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d6c5d50c2a2834ab11f08a4402c779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequence:
+  - {fileID: 949342685}
 --- !u!1001 &585957804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14940,7 +14955,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-260152
+  m_Name: pb_Mesh-558336
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22878,6 +22893,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938260457}
   m_Mesh: {fileID: 2124125107}
+--- !u!1 &949342685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6408335749913094007, guid: 4a5a463e43484184988196a877cffd3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 737794970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &956764945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49527,7 +49548,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh279990
+  m_Name: pb_Mesh488192
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
