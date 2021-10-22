@@ -53,7 +53,7 @@ namespace Horror
 
         #endregion
 
-        public float Intensity => secondsSpentLooking / endSeconds;
+        public float Intensity => Mathf.Min(endSeconds, secondsSpentLooking) / endSeconds;
 
         private LayerMask playerLayer;
 
@@ -123,7 +123,7 @@ namespace Horror
             transform.position = Vector3.Lerp(
                 initialPositionAnchor.position,
                 targetAnchor.position,
-                Mathf.Min(endSeconds, secondsSpentLooking) / endSeconds
+                Intensity
             );
 
             float globalVolume = (1 - audioSource.volume);
