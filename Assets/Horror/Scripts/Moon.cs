@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using Zenject;
 
@@ -23,6 +24,8 @@ namespace Horror
         public float minDot = 0.7f;
 
         public float lookAwayMultiplier = 0.5f;
+
+        public AudioMixer mixer;
 
         public Transform targetAnchor;
 
@@ -102,6 +105,12 @@ namespace Horror
                 targetAnchor.position,
                 Mathf.Min(endSeconds, secondsSpentLooking) / endSeconds
             );
+
+            float globalVolume = (1 - audioSource.volume);
+            float lowestDb = -30;
+            globalVolume = (globalVolume * -lowestDb) + lowestDb;
+
+            mixer.SetFloat("Volume", globalVolume);
         }
 
         private void OnBeginLooking(AudioSource audioSource)

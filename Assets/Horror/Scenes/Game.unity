@@ -8339,6 +8339,7 @@ MonoBehaviour:
   endSeconds: 33.8
   minDot: 0.7
   lookAwayMultiplier: 0.5
+  mixer: {fileID: 24100000, guid: 0bf8813dcfe325043946b52e544d4848, type: 2}
   targetAnchor: {fileID: 279659767}
   initialPositionAnchor: {fileID: 931318896}
   audioTime: 0
@@ -11393,7 +11394,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-80142
+  m_Name: pb_Mesh-173440
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
