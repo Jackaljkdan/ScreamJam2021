@@ -23,7 +23,6 @@ namespace Horror.Interaction
 
         protected override void StartHighlight(RaycastHit hit)
         {
-            Debug.Log("start highlight");
             feedback.Show();
         }
 
@@ -33,7 +32,6 @@ namespace Horror.Interaction
 
         protected override void StopHighlight()
         {
-            Debug.Log("STOP highlight");
             feedback.Hide();
         }
     }
