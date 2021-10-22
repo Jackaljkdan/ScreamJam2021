@@ -56,6 +56,7 @@ namespace Horror
 
             moon.enabled = true;
             moon.minDot = -1;
+            moon.ignoreRaycast = true;
 
             Destroy(gameObject);
         }
