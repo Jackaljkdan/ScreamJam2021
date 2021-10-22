@@ -15,12 +15,17 @@ namespace Horror
         [SerializeField]
         private SlidingDoorInteractable door = null;
 
+        [SerializeField]
+        private GameObject starsBeginning = null;
+
         #endregion
 
         private void OnTriggerEnter(Collider other)
         {
             door.ForceClose();
             door.IsLocked = true;
+
+            starsBeginning.SetActive(false);
 
             Destroy(gameObject);
         }
