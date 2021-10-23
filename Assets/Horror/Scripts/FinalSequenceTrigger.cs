@@ -38,6 +38,9 @@ namespace Horror
         [Inject]
         private CompassRotation compass = null;
 
+        [Inject]
+        private EndGame endGame = null;
+
         private void OnTriggerEnter(Collider other)
         {
             door.ForceClose();
@@ -53,6 +56,7 @@ namespace Horror
 
         private IEnumerator RotateMoonCoroutine()
         {
+            endGame.win = true;
             moon.enabled = false;
             moon.ForceStopLooking();
 

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Horror.Actuators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,12 +18,20 @@ namespace Horror
 
         public float delaySeconds = 2;
 
+        public bool win = false;
+
         public AudioMixer mixer;
 
         #endregion
 
         [Inject]
         private Moon moon = null;
+
+        [Inject(Id = "outro")]
+        private CanvasGroup credits = null;
+
+        [Inject]
+        private RigidBodyMovementActuator movement = null;
 
         [Inject]
         private void Inject(MoonBlackness moonBlackness)
@@ -39,11 +48,23 @@ namespace Horror
         {
             moon.enabled = false;
 
-            yield return new WaitForSeconds(delaySeconds);
-
             yield return mixer.DOSetFloat("Volume", -80, 0.5f).WaitForCompletion();
 
-            SceneManager.LoadSceneAsync("Game");
+            yield return new WaitForSeconds(delaySeconds);
+
+            movement.enabled = false;
+            mixer.DOSetFloat("Volume", 0, 0.5f);
+
+            if (!win)
+            {
+                SceneManager.LoadSceneAsync("Game");
+                yield break;
+            }
+
+            credits.gameObject.SetActive(true);
+            credits.alpha = 0;
+
+            credits.DOFade(1, duration: 1);
         }
     }
     
