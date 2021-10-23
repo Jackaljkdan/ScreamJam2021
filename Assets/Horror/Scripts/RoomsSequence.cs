@@ -39,7 +39,18 @@ namespace Horror
             private set => _index = value;
         }
 
-        private void Start()
+        public Room Current
+        {
+            get
+            {
+                if (Index >= 0 && Index < sequence.Count)
+                    return sequence[Index].GetRoom();
+                else
+                    return null;
+            }
+        }
+
+        private void Awake()
         {
             Index = -1;
             Advance();
@@ -60,16 +71,17 @@ namespace Horror
             if (Index >= 0 && Index < sequence.Count)
                 prevSelected = sequence[Index].GetRoom();
 
-            if (Index < sequence.Count - 1)
-            {
-                Index++;
+            Index++;
 
+            if (Index < sequence.Count)
+            {
                 RoomAlternative element = sequence[Index];
                 nextSelected = element.GetRoom();
                 nextSelected.ActivateAlternative(element);
             }
 
-            RandomizeExcept(prevSelected, nextSelected);
+            if (prevSelected != null || nextSelected != null)
+                RandomizeExcept(prevSelected, nextSelected);
         }
 
         public void RandomizeExcept(params Room[] except)
@@ -86,12 +98,7 @@ namespace Horror
 
         public void RandomizeExceptCurrentAnd(params Room[] except)
         {
-            Room[] current = new Room[1];
-
-            if (Index >= 0 && Index < sequence.Count)
-                current[0] = sequence[Index].GetRoom();
-            else
-                current[0] = null;
+            Room[] current = new Room[1] { Current };
 
             Randomize(except != null
                 ? current.Concat(except)

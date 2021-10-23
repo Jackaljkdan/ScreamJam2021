@@ -1,10 +1,12 @@
 using DG.Tweening;
+using Horror.Attention;
 using Horror.Interaction;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Horror
 {
@@ -26,17 +28,21 @@ namespace Horror
         private float rotateSeconds = 2;
 
         [SerializeField]
-        private Moon moon = null;
-
-        [SerializeField]
         private Transform moonTarget = null;
 
         #endregion
+
+        [Inject]
+        private Moon moon = null;
+
+        [Inject]
+        private CompassRotation compass = null;
 
         private void OnTriggerEnter(Collider other)
         {
             door.ForceClose();
             door.IsLocked = true;
+            compass.target = moon.transform;
 
             starsBeginning.SetActive(false);
 
