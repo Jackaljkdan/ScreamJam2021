@@ -59,6 +59,8 @@ namespace Horror
 
         public float Intensity => Mathf.Min(endSeconds, secondsSpentLooking) / endSeconds;
 
+        public bool IsLooking => isLooking;
+
         private LayerMask playerLayer;
 
         private Tween tween;

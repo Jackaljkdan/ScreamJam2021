@@ -6290,6 +6290,8 @@ GameObject:
   - component: {fileID: 604512923}
   - component: {fileID: 604512925}
   - component: {fileID: 604512924}
+  - component: {fileID: 604512926}
+  - component: {fileID: 604512927}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -6338,6 +6340,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 40
   lerp: 0.3
+--- !u!114 &604512926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604512922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8257f2a6661c9304cba00ae35dc785c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lerp: 0.005
+  target: {fileID: 396597117}
+--- !u!114 &604512927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604512922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476808d7f22cf1049ab0e3b9bcbb915f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minLookLerp: 0
+  maxLookLerp: 2
 --- !u!43 &605378519
 Mesh:
   m_ObjectHideFlags: 0
