@@ -37,6 +37,8 @@ namespace Horror
             StartCoroutine(EmergencyCoroutine());
         }
 
+        Tween tween;
+
         private IEnumerator EmergencyCoroutine()
         {
             if (!target.IsOn)
@@ -49,8 +51,6 @@ namespace Horror
             target.enabled = false;
 
             yield return new WaitForSeconds(3);
-
-            Tween tween;
 
             tween = subtitles.DOText(
                 "EMERGENCY ALERT",
@@ -105,6 +105,21 @@ namespace Horror
 
             subtitles.text = "";
 
+            Destroy(gameObject);
+        }
+
+        private void OnDisable()
+        {
+            moon.enabled = true;
+
+            if (!music.isPlaying)
+                music.Play();
+
+            target.enabled = true;
+
+            tween?.Kill();
+            subtitles.text = "";
+            
             Destroy(gameObject);
         }
     }
