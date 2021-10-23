@@ -41,6 +41,8 @@ namespace Horror
 
         private IEnumerator EmergencyCoroutine()
         {
+            yield return new WaitForSeconds(3);
+
             if (!target.IsOn)
                 target.Interact(new RaycastHit());
 
