@@ -89,7 +89,8 @@ namespace Horror
             yield return new WaitForSeconds(1);
 
             moon.enabled = true;
-            music.Play();
+            if (!music.isPlaying)
+                music.Play();
             target.enabled = true;
 
             yield return tween.WaitForCompletion();
