@@ -57,4 +57,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df976fa6344302a40b343a97bb38690c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  compassDelay: 5
+  compassDelay: 4
