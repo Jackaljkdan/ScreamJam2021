@@ -34,6 +34,8 @@ namespace Horror
 
         private void OnTriggerEnter(Collider other)
         {
+            Destroy(GetComponent<Collider>());
+
             StartCoroutine(EmergencyCoroutine());
         }
 
