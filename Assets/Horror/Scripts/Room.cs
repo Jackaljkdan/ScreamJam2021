@@ -46,7 +46,8 @@ namespace Horror
 
             selected.gameObject.SetActive(true);
 
-            door.ForceClose();
+            if (door != null)
+                door.ForceClose();
         }
     }
     

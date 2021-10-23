@@ -26,6 +26,9 @@ namespace Horror
         [Inject]
         private RoomsSequence roomsSequence = null;
 
+        [Inject(Id = "corridor")]
+        private Room corridor = null;
+
         private void OnTriggerStay(Collider other)
         {
             if (alreadyRandomized)
@@ -39,6 +42,7 @@ namespace Horror
             Room containingRoom = GetComponentInParent<Room>();
 
             roomsSequence.RandomizeExceptCurrentAnd(containingRoom);
+            corridor.ActivateRandomAlternative();
 
             alreadyRandomized = true;
         }
