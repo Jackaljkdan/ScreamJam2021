@@ -23,7 +23,7 @@ namespace Horror
 
         private void Start()
         {
-            GetComponent<CompassRotation>().target = roomsSequence.Current.transform;
+            GetComponent<CompassRotation>().target = roomsSequence.Current.compassTarget;
 
             Destroy(this);
         }

@@ -42,7 +42,7 @@ namespace Horror
 
             Room current = roomsSequence.Current;
 
-            compass.target = current != null ? current.transform : finalRoom;
+            compass.target = current != null ? current.compassTarget : finalRoom;
 
             Destroy(gameObject);
         }

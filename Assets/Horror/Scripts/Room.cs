@@ -12,7 +12,7 @@ namespace Horror
     {
         #region Inspector
 
-        
+        public Transform compassTarget;
 
         #endregion
 
