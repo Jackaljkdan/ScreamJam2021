@@ -13337,6 +13337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 577762128}
   - component: {fileID: 577762129}
+  - component: {fileID: 577762130}
   m_Layer: 0
   m_Name: Rooms
   m_TagString: Untagged
@@ -13378,6 +13379,24 @@ MonoBehaviour:
   sequence:
   - {fileID: 737794972}
   _index: 0
+--- !u!114 &577762130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577762127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 577762129}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1001 &585957804
 PrefabInstance:
   m_ObjectHideFlags: 0
