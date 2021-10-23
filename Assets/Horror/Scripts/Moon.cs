@@ -36,6 +36,8 @@ namespace Horror
 
         public Transform targetAnchor;
 
+        public AnimationCurve movementCurve;
+
         [SerializeField]
         private Transform initialPositionAnchor = null;
 
@@ -125,7 +127,7 @@ namespace Horror
             transform.position = Vector3.Lerp(
                 initialPositionAnchor.position,
                 targetAnchor.position,
-                Intensity
+                movementCurve.Evaluate(Intensity)
             );
 
             float globalVolume = (1 - audioSource.volume);
