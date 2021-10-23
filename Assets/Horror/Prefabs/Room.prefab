@@ -917,6 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compassTarget: {fileID: 6250056258458363766}
+  door: {fileID: 283312264112667948}
 --- !u!1 &283312264842174272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5583,6 +5584,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8438300330170682882}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &283312264112667948 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8571575436349338414, guid: 034b7aa4e4474db4eb9d98f85e3124a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8438300330170682882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cab5934ebd42c14b8fc0284365cb253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8505130321383657081
 PrefabInstance:
   m_ObjectHideFlags: 0

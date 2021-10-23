@@ -1,3 +1,4 @@
+using Horror.Interaction;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace Horror
         #region Inspector
 
         public Transform compassTarget;
+
+        public SlidingDoorInteractable door;
 
         #endregion
 
@@ -42,6 +45,8 @@ namespace Horror
                 alt.gameObject.SetActive(alt == selected);
 
             selected.gameObject.SetActive(true);
+
+            door.ForceClose();
         }
     }
     
