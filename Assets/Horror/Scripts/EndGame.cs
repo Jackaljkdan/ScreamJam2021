@@ -27,9 +27,6 @@ namespace Horror
         [Inject]
         private Moon moon = null;
 
-        [Inject(Id = "outro")]
-        private CanvasGroup credits = null;
-
         [Inject]
         private RigidBodyMovementActuator movement = null;
 
@@ -53,18 +50,15 @@ namespace Horror
             yield return new WaitForSeconds(delaySeconds);
 
             movement.enabled = false;
-            mixer.DOSetFloat("Volume", 0, 0.5f);
 
-            if (!win)
+            if (win)
             {
-                SceneManager.LoadSceneAsync("Game");
+                SceneManager.LoadSceneAsync("Moon");
                 yield break;
             }
 
-            credits.gameObject.SetActive(true);
-            credits.alpha = 0;
-
-            credits.DOFade(1, duration: 1);
+            mixer.DOSetFloat("Volume", 0, 0.5f);
+            SceneManager.LoadSceneAsync("Game");
         }
     }
     

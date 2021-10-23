@@ -18,6 +18,8 @@ namespace Horror
 
         public float fadeSeconds = 2f;
 
+        public AnimationCurve fadeCurve;
+
         public float cooldownSeconds = 2f;
 
         public float endSeconds = 33.8f;
@@ -130,7 +132,8 @@ namespace Horror
             float lowestDb = -30;
             globalVolume = (globalVolume * -lowestDb) + lowestDb;
 
-            mixer.SetFloat("Volume", globalVolume);
+            if (mixer != null)
+                mixer.SetFloat("Volume", globalVolume);
         }
 
         private void OnBeginLooking(AudioSource audioSource)
@@ -139,6 +142,7 @@ namespace Horror
 
             tween?.Kill();
             tween = audioSource.DOFade(1, fadeSeconds * (1 - audioSource.volume));
+            tween.SetEase(fadeCurve);
 
             if (Mathf.Approximately(audioSource.volume, 0))
             {
