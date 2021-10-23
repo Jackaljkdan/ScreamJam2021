@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,25 +12,12 @@ namespace Horror
     {
         #region Inspector
 
-        public List<GameObject> sequence;
+        public List<RoomAlternative> sequence;
 
         [Header("Runtime")]
 
         [SerializeField]
         private int _index = 0;
-
-        private void OnValidate()
-        {
-            foreach (GameObject elem in sequence)
-            {
-                if (elem == null)
-                    throw new ArgumentException($"sequence can't have null elements");
-
-                var room = elem.GetComponentInParent<Room>();
-                if (room == null)
-                    throw new ArgumentException($"{elem.name} is not in a room");
-            }
-        }
 
         [ContextMenu("Advance")]
         private void InspectorAdvance()
@@ -40,7 +28,7 @@ namespace Horror
         [ContextMenu("Randomize")]
         private void InspectorRandomize()
         {
-            Randomize();
+            RandomizeExceptCurrentAnd();
         }
 
         #endregion
@@ -66,25 +54,49 @@ namespace Horror
 
         public void Advance()
         {
-            Index++;
+            Room prevSelected = null;
+            Room nextSelected = null;
 
-            Room preselected = null;
+            if (Index >= 0 && Index < sequence.Count)
+                prevSelected = sequence[Index].GetRoom();
 
-            if (Index < sequence.Count)
+            if (Index < sequence.Count - 1)
             {
-                GameObject element = sequence[Index];
-                preselected = element.GetComponentInParent<Room>();
-                preselected.ActivateAlternative(element);
+                Index++;
+
+                RoomAlternative element = sequence[Index];
+                nextSelected = element.GetRoom();
+                nextSelected.ActivateAlternative(element);
             }
 
-            Randomize(preselected);
+            RandomizeExcept(prevSelected, nextSelected);
         }
 
-        public void Randomize(Room preselected = null)
+        public void RandomizeExcept(params Room[] except)
+        {
+            Randomize(except);
+        }
+
+        public void Randomize(IEnumerable<Room> except)
         {
             foreach (Room room in GetRooms())
-                if (room != preselected)
+                if (except == null || !except.Contains(room))
                     room.ActivateRandomAlternative();
+        }
+
+        public void RandomizeExceptCurrentAnd(params Room[] except)
+        {
+            Room[] current = new Room[1];
+
+            if (Index >= 0 && Index < sequence.Count)
+                current[0] = sequence[Index].GetRoom();
+            else
+                current[0] = null;
+
+            Randomize(except != null
+                ? current.Concat(except)
+                : current
+            );
         }
     }
     
