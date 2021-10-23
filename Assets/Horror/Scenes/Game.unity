@@ -6248,7 +6248,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 846310898}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1614099338}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cab5934ebd42c14b8fc0284365cb253, type: 3}
@@ -29258,6 +29258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571575436349338414, guid: 034b7aa4e4474db4eb9d98f85e3124a2,
+        type: 3}
+      propertyPath: _isLocked
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 034b7aa4e4474db4eb9d98f85e3124a2, type: 3}
@@ -54717,6 +54722,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1614099338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8571575436349338408, guid: 034b7aa4e4474db4eb9d98f85e3124a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 846310898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1614099339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614099338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 173017373}
+  _identifier: room.final
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!43 &1619032627
 Mesh:
   m_ObjectHideFlags: 0

@@ -1,9 +1,11 @@
+using Horror.Interaction;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Horror
 {
@@ -22,13 +24,15 @@ namespace Horror
         [ContextMenu("Advance")]
         private void InspectorAdvance()
         {
-            Advance();
+            if (Application.isPlaying)
+                Advance();
         }
 
         [ContextMenu("Randomize")]
         private void InspectorRandomize()
         {
-            RandomizeExceptCurrentAnd();
+            if (Application.isPlaying)
+                RandomizeExceptCurrentAnd();
         }
 
         #endregion
@@ -49,6 +53,9 @@ namespace Horror
                     return null;
             }
         }
+
+        [Inject(Id="room.final")]
+        private SlidingDoorInteractable finalDoor = null;
 
         private void Awake()
         {
@@ -78,6 +85,10 @@ namespace Horror
                 RoomAlternative element = sequence[Index];
                 nextSelected = element.GetRoom();
                 nextSelected.ActivateAlternative(element);
+            }
+            else if (Index == sequence.Count)
+            {
+                finalDoor.IsLocked = false;
             }
 
             if (prevSelected != null || nextSelected != null)
