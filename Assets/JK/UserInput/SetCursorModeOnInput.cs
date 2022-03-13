@@ -30,6 +30,7 @@ namespace JK.UserInput
             if (UnityEngine.Input.anyKeyDown)
             {
                 Cursor.lockState = mode;
+                Cursor.visible = false;
 
                 if (destroyMode != DestroyMode.None)
                 {
