@@ -1,0 +1,9 @@
+- blur
+- alternative corridoio
+- ceiling light a caso nelle stanze
+- usare suono porta mamma
+
+- modello figo del compass
+- texture porte
+- intensificare camera sway sulla base della luna
+- suono porte bloccate
